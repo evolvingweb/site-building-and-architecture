@@ -4,14 +4,14 @@ image:
 # ddev and composer are running as part of the prebuild
 # when starting a workspace all docker images are ready
 tasks:
-  - name: ddev
+  - before: cd project && ddev pull
     init: |
       sudo cp .gitpod/gitpod-setup-ddev.sh /usr/local/bin/.
-      cd project && ddev pull
-      ./setup.sh
+      cd project && ./setup.sh
     command: |
       cd project && ddev start
-      echo "System is ready. Run `ddev status` to get the URL for the Drupal site."
+      echo "System is ready. Run ddev status to get the URL for the Drupal site."
+      ddev status
 
 # Set the following ports public
 ports:
